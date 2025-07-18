@@ -21,9 +21,9 @@ local Window = library.NewWindow({
 })
 
 local tabs = {
-    Settings = library:CreateSettingsTab(Window)
+    
 }
 
 mod_visual.init(tabs, Window)
 
-print(tabs)
+tabs.settings = library
