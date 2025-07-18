@@ -1,3 +1,12 @@
+getgenv().Config = {
+	Invite = "informant.wtf",
+	Version = "0.0",
+}
+
+getgenv().luaguardvars = {
+	DiscordName = "username#0000",
+}
+
 local library : table = loadstring(game:HttpGet("https://raw.githubusercontent.com/Tomasino234/crimscript/refs/heads/main/uilib.lua"))()
 library:init()
 
@@ -15,6 +24,6 @@ local tabs = {
     Settings = library:CreateSettingsTab(Window)
 }
 
-mod_visual.init(tabs, library)
+mod_visual.init(tabs, Window)
 
 print(tabs)
