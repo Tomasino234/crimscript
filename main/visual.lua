@@ -261,7 +261,7 @@ function step(dt)
 
             if not Character.Head:FindFirstChild(tool_key) and esp_toggles.Tool then
                 local billboardGui = Instance.new("BillboardGui")
-                billboardGui.Name = health_key
+                billboardGui.Name = tool_key
                 billboardGui.Adornee = Character:WaitForChild("Head") 
                 billboardGui.Parent = Character:WaitForChild("Head")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
