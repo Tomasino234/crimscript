@@ -46,7 +46,7 @@ local name_key = generateString()
 local health_key = generateString()
 local tool_key = generateString()
 local cham_transparency = 0.65
-local cham_color = Color3.new(1, 0.403921, 0.403921)
+local cham_color = Color3.new(1, 1, 1)
 local cham_color_mode = "ColorPicker"
 local esp_enabled = false
 local esp_toggles = {
@@ -215,6 +215,10 @@ function step(dt)
                 cham.OutlineTransparency = 1
                 cham.FillTransparency = cham_transparency
 
+                local p = Instance.new("ObjectValue", cham)
+                p.Name = "prnt"
+                p.Value = Character
+
                 table.insert(chams, cham)
             end
 
@@ -288,7 +292,10 @@ function step(dt)
             end
         elseif esp_toggles.Chams == true then
             for _, v:Highlight in chams do
-                v.FillColor = getChamColor(v.Parent.Humanoid)
+                local parent = v:WaitForChild("prnt", 1)
+                parent = parent.Value
+
+                v.FillColor = getChamColor(parent.Humanoid)
                 v.FillTransparency = cham_transparency
             end
         end
