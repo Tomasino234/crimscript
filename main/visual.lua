@@ -209,6 +209,7 @@ function step(dt)
 
         for _, Character : Model in CharacterList do
             if not Character:FindFirstChild(highlight_key) and esp_toggles.Chams then
+                print("created new cham")
                 local cham = Instance.new("Highlight", Character)
                 cham.FillColor = getChamColor(Character.Humanoid)
                 cham.OutlineTransparency = 1
@@ -218,6 +219,7 @@ function step(dt)
             end
 
             if not Character.Head:FindFirstChild(name_key) and esp_toggles.Names then
+                print("created new name")
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = name_key
                 billboardGui.Adornee = Character:WaitForChild("Head") 
@@ -239,6 +241,8 @@ function step(dt)
             end
 
             if not Character.Head:FindFirstChild(health_key) and esp_toggles.Health then
+print("created new health")
+
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = health_key
                 billboardGui.Adornee = Character:WaitForChild("Head") 
@@ -260,6 +264,8 @@ function step(dt)
             end
 
             if not Character.Head:FindFirstChild(tool_key) and esp_toggles.Tool then
+                print("created new tool")
+
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = tool_key
                 billboardGui.Adornee = Character:WaitForChild("Head") 
