@@ -292,13 +292,13 @@ function step(dt)
             end
         elseif esp_toggles.Chams == true then
             for _, v:Highlight in chams do
-                local parent = v:WaitForChild("prnt", 1)
-                parent = parent.Value
-
-                if not parent:FindFirstAncestorWhichIsA("Workspace") then
+                if not v:FindFirstAncestorWhichIsA("Workspace") then
                     v:Destroy()
                     continue
                 end
+
+                local parent = v:WaitForChild("prnt", 1)
+                parent = parent.Value
 
                 v.FillColor = getChamColor(parent.Humanoid)
                 v.FillTransparency = cham_transparency
