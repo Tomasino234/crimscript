@@ -5,6 +5,34 @@ local RunService = game:GetService("RunService")
 
 -- visual tab
 
+local comb = {
+    "sdj",
+    "djs",
+    "gj",
+    "men",
+    "fag",
+    "daq",
+    "glock",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0"
+}
+function generateString()
+    local combo = ""
+    for i = 1,9 do
+        combo = combo..comb[math.random(1,#comb)]
+    end
+
+    return combo
+end
+
 -- callbacks
 
 function colorMode()
@@ -13,7 +41,10 @@ end
 ------------
 -- visual variables --
 
-local highlight_key = "hehaeiofjeoiagjeaxckl"
+local highlight_key = generateString()
+local name_key = generateString()
+local health_key = generateString()
+local tool_key = generateString()
 local cham_transparency = 0.65
 local cham_color = Color3.new(1, 0.403921, 0.403921)
 local cham_color_mode = "ColorPicker"
@@ -97,14 +128,13 @@ function setup2(section)
         color = cham_color,
         trans = 0,
         open = false,
-        callback = function(color, transparency)
+        callback = function(color)
             cham_color = color
-            cham_transparency = transparency
         end
     })
 
     local cham_transparency = section:AddSlider({
-        enabled = false, 
+        enabled = true, 
 	    text = "Cham Transparency", 
 	    flag = 'cham_trans', 
 	    suffix = "", 
@@ -135,10 +165,7 @@ function setup2(section)
     		"Rainbow (WIP)"
     	},
 	    callback = function(v)
-	        if v == "ColorPicker" and not color_picker.enabled then
-                color_picker.enabled = true
-                cham_transparency.enabled = false
-
+	        if v == "ColorPicker" then
                 cham_color_mode = "ColorPicker"
             elseif v ~= "ColorPicker" then
                 color_picker.enabled = false
@@ -157,17 +184,20 @@ function getCharacters()
     return list
 end
 
-function getChamColor(humanoid)
-    if cham_color_mode == "ColorPicker" then
+function getChamColor(humanoid, bypass)
+    if cham_color_mode == "ColorPicker" and not bypass then
         return cham_color
-    elseif cham_color_mode == "Health" then
+    elseif cham_color_mode == "Health" or bypass then
         local num = math.clamp(humanoid.Health/humanoid.MaxHealth, 0, 1)
-        local color = Color3.new(0,1,0):Lerp(Color3.new(1,0,0), num)
+        local color = Color3.new(0,1,0):Lerp(Color3.new(1,0,0), 1-num)
         return color
     end
 end
 
 local chams = {}
+local names = {}
+local healths = {}
+local tools = {}
 function step(dt)
     if esp_enabled then
         local CharacterList = {}
@@ -187,6 +217,69 @@ function step(dt)
 
                 table.insert(chams, cham)
             end
+
+            if not Character.Head:FindFirstChild(name_key) and esp_toggles.Names then
+                local billboardGui = Instance.new("BillboardGui")
+                billboardGui.Name = name_key
+                billboardGui.Adornee = Character:WaitForChild("Head") 
+                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Size = UDim2.new(0, 200, 0, 50)  
+                billboardGui.StudsOffset = Vector3.new(0, 3, 0) 
+                billboardGui.AlwaysOnTop = true
+
+                local textLabel = Instance.new("TextLabel")
+                textLabel.Parent = billboardGui
+                textLabel.Size = UDim2.new(1, 0, 1, 0)
+                textLabel.BackgroundTransparency = 1
+                textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) 
+                textLabel.TextSize = 9
+                textLabel.TextStrokeTransparency = 0
+                textLabel.Text = Character.Name
+
+                table.insert(names, billboardGui)
+            end
+
+            if not Character.Head:FindFirstChild(health_key) and esp_toggles.Health then
+                local billboardGui = Instance.new("BillboardGui")
+                billboardGui.Name = health_key
+                billboardGui.Adornee = Character:WaitForChild("Head") 
+                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Size = UDim2.new(0, 200, 0, 50)  
+                billboardGui.StudsOffset = Vector3.new(0, -3, 0) 
+                billboardGui.AlwaysOnTop = true
+
+                local textLabel = Instance.new("TextLabel")
+                textLabel.Parent = billboardGui
+                textLabel.Size = UDim2.new(1, 0, 1, 0)
+                textLabel.BackgroundTransparency = 1
+                textLabel.TextColor3 = Color3.new(1,1,1)
+                textLabel.TextSize = 9
+                textLabel.TextStrokeTransparency = 0
+                textLabel.Text = ("Health : %s"):format(tostring(Character.Humanoid.Health))
+
+                table.insert(healths, billboardGui)
+            end
+
+            if not Character.Head:FindFirstChild(tool_key) and esp_toggles.Tool then
+                local billboardGui = Instance.new("BillboardGui")
+                billboardGui.Name = health_key
+                billboardGui.Adornee = Character:WaitForChild("Head") 
+                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Size = UDim2.new(0, 200, 0, 50)  
+                billboardGui.StudsOffset = Vector3.new(0, -3, 0) 
+                billboardGui.AlwaysOnTop = true
+
+                local textLabel = Instance.new("TextLabel")
+                textLabel.Parent = billboardGui
+                textLabel.Size = UDim2.new(1, 0, 1, 0)
+                textLabel.BackgroundTransparency = 1
+                textLabel.TextColor3 = Color3.new(1,0.6,0)
+                textLabel.TextSize = 9
+                textLabel.TextStrokeTransparency = 0
+                textLabel.Text = "None"
+
+                table.insert(healths, billboardGui)
+            end
         end
 
         if esp_toggles.Chams ~= true and chams[1] ~= nil then
@@ -196,11 +289,63 @@ function step(dt)
         elseif esp_toggles.Chams == true then
             for _, v:Highlight in chams do
                 v.FillColor = getChamColor(v.Parent.Humanoid)
+                v.FillTransparency = cham_transparency
+            end
+        end
+
+        if esp_toggles.Names ~= true and names[1] ~= nil then
+            for _, v in names do
+                v:Destroy()
+            end
+        end
+
+        if esp_toggles.Health ~= true and healths[1] ~= nil then
+            for _, v in healths do
+                v:Destroy()
+            end
+        elseif esp_toggles.Health then
+            for _, v : BillboardGui in healths do
+                local text : TextLabel = v.TextLabel
+                text.TextColor3 = getChamColor(v.Parent.Parent.Humanoid, true)
+                text.Text = ("Health : %s"):format(tostring(v.Parent.Parent.Humanoid.Health))
+            end
+        end
+
+        if esp_toggles.Tool ~= true and tools[1] ~= nil then
+            for _, v in tools do
+                v:Destroy()
+            end
+        elseif esp_toggles.Tool then
+            for _, v : BillboardGui in tools do
+                local text : TextLabel = v.TextLabel
+                if v.Parent.Parent:FindFirstChildWhichIsA("Tool") then
+                    text.Text = v.Parent.Parent:FindFirstAncestorWhichIsA("Tool")
+                else
+                    text.Text = "None"
+                end
             end
         end
     else
         if chams[1] ~= nil then
             for _, v in chams do
+                v:Destroy()
+            end
+        end
+
+        if names[1] ~= nil then
+            for _, v in names do
+                v:Destroy()
+            end
+        end
+
+        if healths[1] ~= nil then
+            for _, v in healths do
+                v:Destroy()
+            end
+        end
+
+        if tools[1] ~= nil then
+            for _, v in tools do
                 v:Destroy()
             end
         end
