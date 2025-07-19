@@ -163,7 +163,7 @@ function getChamColor(humanoid)
     elseif cham_color_mode == "Health" then
         local num = math.clamp(humanoid.Health/humanoid.MaxHealth, 0, 1)
         local color = Color3.new(0,1,0):Lerp(Color3.new(1,0,0), num)
-        return num
+        return color
     end
 end
 
