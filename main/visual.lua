@@ -188,8 +188,7 @@ function getChamColor(humanoid, bypass)
     if cham_color_mode == "ColorPicker" and not bypass then
         return cham_color
     elseif cham_color_mode == "Health" or bypass then
-        local num = math.clamp(humanoid.Health/humanoid.MaxHealth, 0, 1)
-        local color = Color3.new(0,1,0):Lerp(Color3.new(1,0,0), 1-num)
+        local color = Color3.fromRGB(255,0,0):Lerp(Color3.fromRGB(0,255,0), humanoid.Health/humanoid.MaxHealth)
         return color
     end
 end
@@ -266,7 +265,7 @@ function step(dt)
                 billboardGui.Adornee = Character:WaitForChild("Head") 
                 billboardGui.Parent = Character:WaitForChild("Head")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
-                billboardGui.StudsOffset = Vector3.new(0, -3, 0) 
+                billboardGui.StudsOffset = Vector3.new(0, -4, 0) 
                 billboardGui.AlwaysOnTop = true
 
                 local textLabel = Instance.new("TextLabel")
@@ -278,7 +277,7 @@ function step(dt)
                 textLabel.TextStrokeTransparency = 0
                 textLabel.Text = "None"
 
-                table.insert(healths, billboardGui)
+                table.insert(tools, billboardGui)
             end
         end
 
