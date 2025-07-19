@@ -201,6 +201,10 @@ function step(dt)
         end
 
         for _, Character : Model in CharacterList do
+            if not Character:FindFirstChild("HumanoidRootPart") then
+                continue
+            end
+
             if not Character:FindFirstChild(highlight_key) and esp_toggles.Chams then
                 local cham = Instance.new("Highlight", Character)
                 cham.Name = highlight_key
