@@ -202,10 +202,14 @@ function step(dt)
 
         for _, Character : Model in CharacterList do
             if not Character:FindFirstChild("HumanoidRootPart") then
+                CharacterList[Character.Name] = nil
+
                 continue
             end
 
             if not Character:FindFirstChild(highlight_key) and esp_toggles.Chams then
+                print('new highlight in : '..Character.Name)
+
                 local cham = Instance.new("Highlight", Character)
                 cham.Name = highlight_key
                 cham.FillColor = getChamColor(Character.Humanoid)
@@ -343,6 +347,32 @@ function step(dt)
                 else
                     text.Text = "None"
                 end
+            end
+        end
+
+        for _, v in chams do
+            if not v:FindFirstAncestorWhichIsA("Workspace") then
+                v:Destroy()
+            end
+        end
+
+        
+        for _, v in names  do
+            if not v:FindFirstAncestorWhichIsA("Workspace") then
+                v:Destroy()
+            end
+        end
+
+        
+        for _, v in tools do
+            if not v:FindFirstAncestorWhichIsA("Workspace") then
+                v:Destroy()
+            end
+        end
+        
+        for _, v in healths do
+            if not v:FindFirstAncestorWhichIsA("Workspace") then
+                v:Destroy()
             end
         end
     else
