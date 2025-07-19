@@ -310,6 +310,12 @@ function step(dt)
             end
         elseif esp_toggles.Health then
             for _, v : BillboardGui in healths do
+                if not v:FindFirstChildWhichIsA("TextLabel") then
+                    v:Destroy()
+
+                    continue
+                end
+
                 local text : TextLabel = v.TextLabel
                 text.TextColor3 = getChamColor(v.Parent.Parent.Humanoid, true)
                 text.Text = ("Health : %s"):format(tostring(v.Parent.Parent.Humanoid.Health))
