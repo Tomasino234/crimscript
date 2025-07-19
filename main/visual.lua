@@ -1,4 +1,5 @@
 local self = {}
+local library
 
 local RunService = game:GetService("RunService")
 
@@ -157,6 +158,8 @@ function getCharacters()
             list[Character.Name] = Character
         end
     end
+
+    return list
 end
 
 function getChamColor(humanoid)
@@ -201,7 +204,9 @@ function step(dt)
     end
 end
 
-function self.init(tabs, window)
+function self.init(tabs, window, l)
+    library = l
+
     local tab = window:AddTab("Visual")
     tabs["visual"] = tab
 

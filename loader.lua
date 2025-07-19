@@ -21,10 +21,6 @@ end)
 
 -- end of bypass
 
-repeat
-    task.wait()
-until game:IsLoaded()
-
 getgenv().Config = {
 	Invite = "informant.wtf",
 	Version = "0.0",
@@ -51,6 +47,6 @@ local tabs = {
     
 }
 
-mod_visual.init(tabs, Window)
+mod_visual.init(tabs, Window, library)
 
 tabs.settings = library:CreateSettingsTab(Window)
