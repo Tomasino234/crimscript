@@ -1,4 +1,4 @@
-local oldNewIndex
+--[[local oldNewIndex
 local usedtable = {}
 oldNewIndex = hookmetamethod(game, "__newindex", function(self, key, value)
     if typeof(self) == "Instance"
@@ -21,6 +21,10 @@ end)
 
 -- end of bypass
 
+repeat
+    task.wait()
+until game:IsLoaded()
+--]]
 getgenv().Config = {
 	Invite = "informant.wtf",
 	Version = "0.0",
@@ -49,4 +53,4 @@ local tabs = {
 
 mod_visual.init(tabs, Window)
 
-tabs.settings = library
+tabs.settings = library:CreateSettingsTab()
