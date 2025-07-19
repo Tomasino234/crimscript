@@ -335,7 +335,7 @@ function step(dt)
 
                 local text : TextLabel = v.TextLabel
                 if v.Parent.Parent:FindFirstChildWhichIsA("Tool") then
-                    text.Text = v.Parent.Parent:FindFirstAncestorWhichIsA("Tool")
+                    text.Text = v.Parent.Parent:FindFirstChildWhichIsA("Tool")
                 else
                     text.Text = "None"
                 end
