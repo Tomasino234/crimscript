@@ -136,7 +136,13 @@ function setup2(section)
 	    callback = function(v)
 	        if v == "ColorPicker" and not color_picker.enabled then
                 color_picker.enabled = true
+                cham_transparency.enabled = false
+
+                cham_color_mode = "ColorPicker"
             elseif v ~= "ColorPicker" then
+                color_picker.enabled = false
+                cham_transparency.enabled = true
+
                 cham_color_mode = v
             end
 	    end
