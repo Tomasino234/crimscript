@@ -349,32 +349,6 @@ function step(dt)
                 end
             end
         end
-
-        for _, v in chams do
-            if not v:FindFirstAncestorWhichIsA("Workspace") then
-                v:Destroy()
-            end
-        end
-
-        
-        for _, v in names  do
-            if not v:FindFirstAncestorWhichIsA("Workspace") then
-                v:Destroy()
-            end
-        end
-
-        
-        for _, v in tools do
-            if not v:FindFirstAncestorWhichIsA("Workspace") then
-                v:Destroy()
-            end
-        end
-        
-        for _, v in healths do
-            if not v:FindFirstAncestorWhichIsA("Workspace") then
-                v:Destroy()
-            end
-        end
     else
 
         for _, v in chams do
