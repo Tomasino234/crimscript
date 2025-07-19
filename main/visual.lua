@@ -295,6 +295,11 @@ function step(dt)
                 local parent = v:WaitForChild("prnt", 1)
                 parent = parent.Value
 
+                if not parent.Value:FindFirstAncestorWhichIsA("Workspace") then
+                    v:Destroy()
+                    continue
+                end
+
                 v.FillColor = getChamColor(parent.Humanoid)
                 v.FillTransparency = cham_transparency
             end
@@ -330,6 +335,11 @@ function step(dt)
             end
         elseif esp_toggles.Tool then
             for _, v : BillboardGui in tools do
+                if not v:FindFirstAncestorWhichIsA("Workspace") then
+                    v:Destroy()
+                    continue
+                end
+
                 local text : TextLabel = v.TextLabel
                 if v.Parent.Parent:FindFirstChildWhichIsA("Tool") then
                     text.Text = v.Parent.Parent:FindFirstAncestorWhichIsA("Tool")
