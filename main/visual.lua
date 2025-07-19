@@ -295,7 +295,7 @@ function step(dt)
                 local parent = v:WaitForChild("prnt", 1)
                 parent = parent.Value
 
-                if not parent.Value:FindFirstAncestorWhichIsA("Workspace") then
+                if not parent:FindFirstAncestorWhichIsA("Workspace") then
                     v:Destroy()
                     continue
                 end
