@@ -1,7 +1,6 @@
 local oldNewIndex
 local usedtable = {}
 oldNewIndex = hookmetamethod(game, "__newindex", function(self, key, value)
-    -- Check if setting the Name of a RemoteEvent-like object
     if typeof(self) == "Instance"
         and (self:IsA("RemoteEvent") or self:IsA("RemoteFunction") or self:IsA("BindableEvent") or self:IsA("BindableFunction"))
         and key == "Name"
@@ -15,13 +14,12 @@ oldNewIndex = hookmetamethod(game, "__newindex", function(self, key, value)
         task.delay(0.1, function()
             self.Name = ogname
         end)
-
-        -- Optional: Save it, tag it, or compare to a target
-        -- Example: if self.Name == "TargetRemote" then do something
     end
 
     return oldNewIndex(self, key, value)
 end)
+
+-- end of bypass
 
 getgenv().Config = {
 	Invite = "informant.wtf",
@@ -41,7 +39,7 @@ local mod_visual : table = loadstring(game:HttpGet("https://raw.githubuserconten
 
 -- main
 local Window = library.NewWindow({
-    title = "femWare v2 (UNOFFICIAL)",
+    title = "porn hub",
     size = UDim2.new(0, 525, 0, 650),
 })
 
