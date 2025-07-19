@@ -194,15 +194,15 @@ local CharacterList = {}
 function step(dt)
     if esp_enabled then
         for _, v : Humanoid in workspace:GetDescendants() do
-           if v:IsA("Humanoid") and v.Parent ~= game.Players.LocalPlayer.Character then
+           if v:IsA("Humanoid") and v.Parent ~= game.Players.LocalPlayer.Character and not table.find(CharacterList, v.Parent) and v.Parent:FindFirstChild("HumanoidRootPart") then
                 local Character = v.Parent
-                CharacterList[Character.Name] = Character
+                table.insert(CharacterList, Character)
             end
         end
 
         for _, Character : Model in CharacterList do
             if not Character:FindFirstChild("HumanoidRootPart") then
-                CharacterList[Character.Name] = nil
+                CharacterList[Character] = nil
 
                 continue
             end
