@@ -197,11 +197,11 @@ local chams = {}
 local names = {}
 local healths = {}
 local tools = {}
+local CharacterList = {}
 function step(dt)
     if esp_enabled then
-        local CharacterList = {}
         for _, v : Humanoid in workspace:GetDescendants() do
-           if v:IsA("Humanoid") then
+           if v:IsA("Humanoid") and CharacterList[v.Parent.Name] == nil then
                 local Character = v.Parent
                 CharacterList[Character.Name] = Character
             end
@@ -241,7 +241,7 @@ function step(dt)
             end
 
             if not Character.Head:FindFirstChild(health_key) and esp_toggles.Health then
-print("created new health")
+                print("created new health")
 
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = health_key
@@ -287,7 +287,7 @@ print("created new health")
             end
         end
 
-        if esp_toggles.Chams ~= true and chams[1] ~= nil then
+        if esp_toggles.Chams ~= true then
             for _, v in chams do
                 v:Destroy()
             end
@@ -298,13 +298,13 @@ print("created new health")
             end
         end
 
-        if esp_toggles.Names ~= true and names[1] ~= nil then
+        if esp_toggles.Names ~= true then
             for _, v in names do
                 v:Destroy()
             end
         end
 
-        if esp_toggles.Health ~= true and healths[1] ~= nil then
+        if esp_toggles.Health ~= true then
             for _, v in healths do
                 v:Destroy()
             end
@@ -316,7 +316,7 @@ print("created new health")
             end
         end
 
-        if esp_toggles.Tool ~= true and tools[1] ~= nil then
+        if esp_toggles.Tool ~= true then
             for _, v in tools do
                 v:Destroy()
             end
@@ -331,28 +331,21 @@ print("created new health")
             end
         end
     else
-        if chams[1] ~= nil then
-            for _, v in chams do
-                v:Destroy()
-            end
+
+        for _, v in chams do
+            v:Destroy()
         end
 
-        if names[1] ~= nil then
-            for _, v in names do
-                v:Destroy()
-            end
+        for _, v in names do
+            v:Destroy()
         end
 
-        if healths[1] ~= nil then
-            for _, v in healths do
-                v:Destroy()
-            end
+        for _, v in healths do
+            v:Destroy()
         end
 
-        if tools[1] ~= nil then
-            for _, v in tools do
-                v:Destroy()
-            end
+        for _, v in tools do
+            v:Destroy()
         end
     end
 end
