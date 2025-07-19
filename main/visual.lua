@@ -317,7 +317,7 @@ function step(dt)
             end
         elseif esp_toggles.Health then
             for _, v : BillboardGui in healths do
-                if not v:FindFirstChildWhichIsA("TextLabel") then
+                if not v:FindFirstChildWhichIsA("TextLabel") or not v:FindFirstAncestorWhichIsA("Workspace") then
                     v:Destroy()
 
                     continue
