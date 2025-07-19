@@ -177,13 +177,6 @@ function setup2(section)
     })
 end
 
-function getCharacters()
-    local list = {}
-
-
-    return list
-end
-
 function getChamColor(humanoid, bypass)
     if cham_color_mode == "ColorPicker" and not bypass then
         return cham_color
@@ -222,11 +215,11 @@ function step(dt)
                 table.insert(chams, cham)
             end
 
-            if not Character.Head:FindFirstChild(name_key) and esp_toggles.Names then
+            if not Character.HumanoidRootPart:FindFirstChild(name_key) and esp_toggles.Names then
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = name_key
-                billboardGui.Adornee = Character:WaitForChild("Head") 
-                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Adornee = Character:WaitForChild("HumanoidRootPart") 
+                billboardGui.Parent = Character:WaitForChild("HumanoidRootPart")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
                 billboardGui.StudsOffset = Vector3.new(0, 3, 0) 
                 billboardGui.AlwaysOnTop = true
@@ -243,11 +236,11 @@ function step(dt)
                 table.insert(names, billboardGui)
             end
 
-            if not Character.Head:FindFirstChild(health_key) and esp_toggles.Health then
+            if not Character.HumanoidRootPart:FindFirstChild(health_key) and esp_toggles.Health then
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = health_key
-                billboardGui.Adornee = Character:WaitForChild("Head") 
-                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Adornee = Character:WaitForChild("HumanoidRootPart") 
+                billboardGui.Parent = Character:WaitForChild("HumanoidRootPart")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
                 billboardGui.StudsOffset = Vector3.new(0, -4, 0) 
                 billboardGui.AlwaysOnTop = true
@@ -264,11 +257,11 @@ function step(dt)
                 table.insert(healths, billboardGui)
             end
 
-            if not Character.Head:FindFirstChild(tool_key) and esp_toggles.Tool then
+            if not Character.HumanoidRootPart:FindFirstChild(tool_key) and esp_toggles.Tool then
                 local billboardGui = Instance.new("BillboardGui")
                 billboardGui.Name = tool_key
-                billboardGui.Adornee = Character:WaitForChild("Head") 
-                billboardGui.Parent = Character:WaitForChild("Head")
+                billboardGui.Adornee = Character:WaitForChild("HumanoidRootPart") 
+                billboardGui.Parent = Character:WaitForChild("HumanoidRootPart")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
                 billboardGui.StudsOffset = Vector3.new(0, -5.5, 0) 
                 billboardGui.AlwaysOnTop = true
