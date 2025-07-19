@@ -201,7 +201,7 @@ local CharacterList = {}
 function step(dt)
     if esp_enabled then
         for _, v : Humanoid in workspace:GetDescendants() do
-           if v:IsA("Humanoid") and CharacterList[v.Parent.Name] == nil then
+           if v:IsA("Humanoid") and CharacterList[v.Parent.Name] == nil and v.Parent ~= game.Players.LocalPlayer.Character then
                 local Character = v.Parent
                 CharacterList[Character.Name] = Character
             end
@@ -249,7 +249,7 @@ function step(dt)
                 billboardGui.Adornee = Character:WaitForChild("Head") 
                 billboardGui.Parent = Character:WaitForChild("Head")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
-                billboardGui.StudsOffset = Vector3.new(0, -3, 0) 
+                billboardGui.StudsOffset = Vector3.new(0, -4, 0) 
                 billboardGui.AlwaysOnTop = true
 
                 local textLabel = Instance.new("TextLabel")
@@ -270,7 +270,7 @@ function step(dt)
                 billboardGui.Adornee = Character:WaitForChild("Head") 
                 billboardGui.Parent = Character:WaitForChild("Head")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)  
-                billboardGui.StudsOffset = Vector3.new(0, -4, 0) 
+                billboardGui.StudsOffset = Vector3.new(0, -5.5, 0) 
                 billboardGui.AlwaysOnTop = true
 
                 local textLabel = Instance.new("TextLabel")
