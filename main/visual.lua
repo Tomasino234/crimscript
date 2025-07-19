@@ -152,12 +152,7 @@ end
 
 function getCharacters()
     local list = {}
-    for _, v : Humanoid in workspace:GetDescendants() do
-        if v:IsA("Humanoid") then
-            local Character = v.Parent
-            list[Character.Name] = Character
-        end
-    end
+
 
     return list
 end
@@ -174,7 +169,14 @@ end
 local chams = {}
 function step(dt)
     if esp_enabled then
-        local CharacterList = getCharacters()
+        local CharacterList = {}
+        for _, v : Humanoid in workspace:GetDescendants() do
+           if v:IsA("Humanoid") then
+                local Character = v.Parent
+                CharacterList[Character.Name] = Character
+            end
+        end
+
         for _, Character : Model in CharacterList do
             if not Character:FindFirstChild(highlight_key) and esp_toggles.Chams then
                 local cham = Instance.new("Highlight", Character)
