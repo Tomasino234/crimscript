@@ -201,7 +201,7 @@ local CharacterList = {}
 function step(dt)
     if esp_enabled then
         for _, v : Humanoid in workspace:GetDescendants() do
-           if v:IsA("Humanoid") and (CharacterList[v.Parent.Name] == nil or not CharacterList[v.Parent.Name]:FindFirstChild("Head")) and v.Parent ~= game.Players.LocalPlayer.Character then
+           if v:IsA("Humanoid") and v.Parent ~= game.Players.LocalPlayer.Character then
                 local Character = v.Parent
                 CharacterList[Character.Name] = Character
             end
